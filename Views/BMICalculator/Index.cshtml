@@ -1,0 +1,125 @@
+﻿@model bmicalculator.Models.BMICalculator
+
+@{
+    ViewData["Title"] = "BMI Calculator";
+}
+
+<h2>BMI Calculator</h2>
+
+<form method="post">
+    <label>Age:</label>
+    <input type="number" name="Age" required min="2" max="120" />
+    <br />
+
+    <label>Height (meters):</label>
+    <input type="text" name="Height" required placeholder="Enter height in meters" />
+    <br />
+
+    <label>Weight (kg):</label>
+    <input type="text" name="Weight" required placeholder="Enter weight in kilograms" />
+    <br />
+
+    <label>Gender:</label>
+    <input type="radio" name="Gender" value="Male" checked /> Male
+    <input type="radio" name="Gender" value="Female" /> Female
+    <br/>
+
+    <button type="submit">Calculate</button>
+    <button type="button" onclick="clearForm()">Clear</button>
+</form>
+
+@if (Model != null && Model.BMI > 0)
+{
+    <h3>Your BMI: @Model.BMI.ToString("0.00")</h3>
+    <h4>Category: @Model.Category</h4>
+
+    <div class="bmi-bar">
+        <div class="bmi-fill" style="width:@(Model.BMI*3)%;"></div>
+    </div>
+}
+
+
+
+<style>
+    body {
+        background: linear-gradient(to right, #f0f4c3, #a8e6cf);
+        font-family: 'Poppins', Arial, sans-serif;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h2 {
+        color: #2c3e50;
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    form {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 12px;
+        display: inline-block;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+        width: 320px;
+    }
+
+    label {
+        font-size: 16px;
+        font-weight: 600;
+        display: block;
+        margin-top: 12px;
+    }
+
+    input {
+        margin: 5px 0;
+        padding: 12px;
+        width: 100%;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        background: #f9f9f9;
+        transition: border 0.3s;
+    }
+
+        input:focus {
+            border-color: #4da6ff;
+        }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 18px;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 16px;
+        margin-top: 15px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        button:hover {
+            background-color: #388E3C;
+        }
+
+    .bmi-bar {
+        width: 90%;
+        max-width: 600px;
+        height: 35px;
+        background: linear-gradient(to right, #4da6ff 0%, #4CAF50 25%, #FFC107 50%, #FF5722 75%, #D32F2F 100%);
+        border-radius: 18px;
+        margin: 25px auto;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .bmi-fill {
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        transition: width 0.5s ease-in-out;
+    }
+</style>
